@@ -4,16 +4,19 @@
     <head>
         <title>Scuccess</title>
         <meta charset='UTF-8'>
-        <!-- {% load static %} -->
-        <!-- <link rel="stylesheet" href="{% static 'login_registration/css/main.css' %}" media="screen" title="no title"  charset="utf-8"> -->
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'login_registration/css/style2.css' %}" media="screen" title="no title"  charset="utf-8">
     </head>
 
     <body>
         <div id='wrapper'>
 
             <!-- <h1>Success! Welcome, {{session.user.first_name}} {{session.user.last_name}}!</h1> -->
-            <h1>Success! Welcome, {{user}}!</h1>
-            <p>Successfully registered (or logged in)!</p>
+            <div id='row1'>
+                    <h1>Success! Welcome, {{user}}!</h1>
+                    <p>Successfully registered (or logged in)!</p>
+            </div>
+            
 
         </div>
        

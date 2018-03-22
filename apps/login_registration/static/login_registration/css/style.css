@@ -21,10 +21,10 @@
     color: black;
 }
 
-.flash{
+.messages{
     text-align: center;
     color: white;
-    font-size: 14pt;
+    font-size: 16pt;
     margin-bottom: 10px;
 }
 
@@ -77,7 +77,7 @@
 }
 #row4 input{
     width: 150px;
-    margin-left: 33px;
+    margin-left: 57px;
 }
 #row5 {
     display: block;
@@ -86,7 +86,7 @@
 }
 #row5 input{
     width: 150px;
-    margin-left: 57px;
+    margin-left: 0px;
 }
 
 #row6 {
@@ -96,6 +96,7 @@
 }
 #row6 input{
     width: 150px;
+    margin-left: 43px
 }
 #row7 {
     display: block;
@@ -104,15 +105,9 @@
 }
 #row7 input{
     width: 150px;
+    margin-left: 22px;
 }
-#row8 {
-    display: block;
-    margin-left: 80px;
-    margin-bottom: 20px;
-}
-#row8 input{
-    width: 150px;
-}
+
 
 
 #submit{

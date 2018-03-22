@@ -36,6 +36,7 @@ def register(request):
         l_name = u.last_name
         full_name = f_name + ' ' + l_name
         request.session['user_name'] = full_name
+        # request.session['user'] = u
         id = u.id
     return redirect("/login_registration/success/{}".format(id))
 
@@ -63,47 +64,9 @@ def login(request):
                 id = n.id
                 return redirect('/login_registration/success/{}'.format(n.id))  
     else:
+        print 'inside else'
         messages.add_message(request, messages.INFO, 'Incorrect email and or password')
         return redirect('/login_registration')
 
 
-# def edit(request, id):
-#     context = {
-#         "data": User.objects.get( id=id ),
-#         "flag": 1
-#     }
-#     print context['data'].first_name
-#     print context['data']
-#     print context['flag']
-#     return render(request, "restful_users/newUser.html", context)
-
-
-# def update(request, id):
-#     print id
-#     errors = User.objects.basic_validator(request.POST)
-#     if len(errors):
-#         for tag, error in errors.iteritems():
-#             messages.error(request, error, extra_tags=tag)
-#         return redirect( '/users/{}/edit/'.format(id) )
-#     else:
-#         U = User.objects.get(id = id)
-#         U.first_name = request.POST['firstName']
-#         U.last_name = request.POST['lastName']
-#         U.email = request.POST['email']
-#         U.save()
-#     return redirect('/users')
-
-
-# def show(request, id):
-#     context = {
-#         "data": User.objects.get(id=id)
-#     }
-#     return render(request, 'restful_users/user.html', context)
-
-
-# def delete(request, id):
-#     print id
-#     u = User.objects.get(id=id)
-#     print u
-#     u.delete()
-#     return redirect('/users')
+# <li{% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>

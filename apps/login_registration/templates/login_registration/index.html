@@ -3,7 +3,7 @@
 <html>
 
     <head>
-        <title>Register</title>
+        <title>Register/Login</title>
         <meta charset='UTF-8'>
         {% load static %}
         <link rel="stylesheet" href="{% static 'login_registration/css/style.css' %}" media="screen" title="no title"  charset="utf-8">
@@ -32,12 +32,12 @@
                     <input type='text' name='email'>
                 </div>
 
-                <div id='row5'>
+                <div id='row4'>
                     <label>password:</label>
                     <input type='password' name='password'>
                 </div>
 
-                <div id='row6'>
+                <div id='row5'>
                     <label>Confrim password:</label>
                     <input type='password' name='confirmPass'>
                 </div>
@@ -46,24 +46,27 @@
 
             </form>
 
+
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+
             <h1>Login</h1>
 
             <form action='/login_registration/login' method='post'>
                 {% csrf_token %}
-                {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-
-                <div id='row7'>
+                
+                <div id='row6'>
                     <label>Email:</label>
                     <input type='text' name='email'>
                 </div>
 
-                <div id='row8'>
+                <div id='row7'>
                     <label>password:</label>
                     <input type='password' name='password'>
                 </div>
