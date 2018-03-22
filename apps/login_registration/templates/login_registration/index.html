@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Register</title>
+        <meta charset='UTF-8'>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'login_registration/css/style.css' %}" media="screen" title="no title"  charset="utf-8">
+    </head>
+
+    <body>
+        <div id='wrapper'>
+
+            <h1>Registration</h1>
+
+            <form action='/login_registration/register' method='post'>
+                {% csrf_token %}
+                <div id='row1'>
+                    <label>First Name:</label>
+                    <input type='text' name='firstName'>
+                </div>
+                
+
+                <div id='row2'>
+                    <label>Last Name:</label>
+                    <input type='text' name='lastName'>
+                </div>
+    
+                <div id='row3'>
+                    <label>Email:</label>
+                    <input type='text' name='email'>
+                </div>
+
+                <div id='row5'>
+                    <label>password:</label>
+                    <input type='password' name='password'>
+                </div>
+
+                <div id='row6'>
+                    <label>Confrim password:</label>
+                    <input type='password' name='confirmPass'>
+                </div>
+                
+                <input type='submit' id='submit' value='Register'>
+
+            </form>
+
+            <h1>Login</h1>
+
+            <form action='/login_registration/login' method='post'>
+                {% csrf_token %}
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                <div id='row7'>
+                    <label>Email:</label>
+                    <input type='text' name='email'>
+                </div>
+
+                <div id='row8'>
+                    <label>password:</label>
+                    <input type='password' name='password'>
+                </div>
+  
+                <input type='submit' id='submit' value='Login'>
+
+            </form>
+            
+        </div>
+       
+    </body>
+
+</html>
