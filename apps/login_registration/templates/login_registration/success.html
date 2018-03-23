@@ -11,13 +11,16 @@
     <body>
         <div id='wrapper'>
 
-            <!-- <h1>Success! Welcome, {{session.user.first_name}} {{session.user.last_name}}!</h1> -->
             <div id='row1'>
-                    <h1>Success! Welcome, {{user}}!</h1>
+                    <h1>Success! Welcome, {{user.first_name}} {{user.last_name}}!</h1>
                     <p>Successfully registered (or logged in)!</p>
             </div>
-            
 
+            <form action="/login_registration/logout" method="post">
+                {% csrf_token %}
+                <input type='submit' name='password' value='Log Out'>
+            </form>
+            
         </div>
        
     </body>

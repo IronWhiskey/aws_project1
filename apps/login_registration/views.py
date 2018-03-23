@@ -13,10 +13,14 @@ from django.contrib import messages
 #------------------------------------------------------------------------------------
 
 
+# function that renders the index.html page
 def renderIndex(request):
+    if "user_id" not in request.session:
+        request.session['user_id'] = False
     return render(request, 'login_registration/index.html')
 
 
+# function that takes user form input from a POST request and creates a new user in db
 def register(request):
     errors = User.objects.basic_validator(request.POST)
     if len(errors):
@@ -31,23 +35,20 @@ def register(request):
         hp = bcrypt.hashpw( p.encode(), bcrypt.gensalt() )
         User.objects.create(first_name = f, last_name = l, email_address = e, password_hash = hp)
         u = User.objects.filter(email_address = e, password_hash = hp)[0]
-        # getting user name and placing in a session to use in render below
-        f_name = u.first_name
-        l_name = u.last_name
-        full_name = f_name + ' ' + l_name
-        request.session['user_name'] = full_name
-        # request.session['user'] = u
-        id = u.id
+        id = u.id   # get the user id of the user just registered
     return redirect("/login_registration/success/{}".format(id))
 
 
+# function that renders the success page
 def renderSuccess(request, id):
     context = {
-        "user": request.session['user_name']
+        # "user": request.session['user_name']
+        "user": User.objects.get(id=id)
     }
     return render(request, 'login_registration/success.html', context)
 
 
+# function that gets user email and password from a POST on login page and checks for valid creds
 def login(request):
     e = request.POST["email"]
     p = request.POST['password']
@@ -57,11 +58,7 @@ def login(request):
     if len(temp_users) > 0:
         for n in temp_users:
             if (bcrypt.checkpw(p.encode(), n.password_hash.encode())):
-                f_name = n.first_name
-                l_name = n.last_name
-                full_name = f_name + ' ' + l_name
-                request.session['user_name'] = full_name
-                id = n.id
+                request.session['user_id'] = n.id
                 return redirect('/login_registration/success/{}'.format(n.id))  
     else:
         print 'inside else'
@@ -69,4 +66,12 @@ def login(request):
         return redirect('/login_registration')
 
 
-# <li{% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+# function to logout a user and redirect to login/register page
+def logout(request):
+    request.session['user_id'] = False
+    return redirect('/login_registration/goodbye')
+
+# function used to render the goodbye exit page
+def renderGoodbye(request):
+    return render(request, 'login_registration/goodbye.html')
+    
