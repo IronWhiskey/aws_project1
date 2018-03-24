@@ -136,6 +136,7 @@ def details(request, trip_id):
         return redirect('/main')
     return redirect('/travels/destination/{}'.format(trip_id))
 
+
 def renderDetails(request, trip_id):
     #if the user_id is not in the session cookies were lost, redirect to the main login page    
     if "user_id" not in request.session:
@@ -143,10 +144,7 @@ def renderDetails(request, trip_id):
     this_trip = Trip.objects.get(id=trip_id)
     person = this_trip.planner
     personName = person.first_name + ' ' + person.last_name
-    
-    
     attending = this_trip.attendee.exclude(id = person.id)
-
     context = {
         "planner": personName,
         "trip": this_trip,
@@ -154,10 +152,12 @@ def renderDetails(request, trip_id):
     }
     return render(request, "travelBuddy/details.html", context)
 
+
 # function to logout a user and redirect to login/register page
 def logout(request):
     del request.session['user_id']
     return redirect('/main')
+
 
 # function used to render the goodbye exit page
 def renderGoodbye(request):
