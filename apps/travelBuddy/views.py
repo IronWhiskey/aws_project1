@@ -1,8 +1,8 @@
 # Dev: Michael G.
 # Date: 3/21/2018 
 # Build with: python, django, html, css
-# Description:  app that stores and displays users upcoming trips and allows others to
-# view and join their trips
+# Description:  trip sharing application that stores and displays users upcoming trips
+# and allows others to view and join their trips
 
 #------------------------------------- IMPORTS --------------------------------------
 from __future__ import unicode_literals
@@ -67,6 +67,7 @@ def renderTrips(request):
 
 # function that gets user email and password from a POST on login page and checks for valid creds
 def login(request):
+    #if the user_id is not in the session cookies were lost, redirect to the main login page
     if "user_id" not in request.session:
         return redirect('/main')
     un = request.POST["username"]
@@ -88,6 +89,7 @@ def login(request):
 
 # function that joins a current user to an existing trip
 def join(request, trip_id):
+    #if the user_id is not in the session cookies were lost, redirect to the main login page
     if "user_id" not in request.session:
         return redirect('/main')
     u_id = request.session['user_id']
@@ -107,6 +109,7 @@ def renderAddPlan(request):
 
 # function to add a new trip for a user
 def addPlan(request):
+    #if the user_id is not in the session cookies were lost, redirect to the main login page
     if "user_id" not in request.session:
         return redirect('/main')
     user_id = request.session['user_id']
@@ -128,6 +131,7 @@ def addPlan(request):
 
 
 def details(request, trip_id):
+    #if the user_id is not in the session cookies were lost, redirect to the main login page
     if "user_id" not in request.session:
         return redirect('/main')
     return redirect('/travels/destination/{}'.format(trip_id))
