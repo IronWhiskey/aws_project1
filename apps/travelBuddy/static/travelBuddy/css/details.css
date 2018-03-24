@@ -1,0 +1,23 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+#wrapper{
+    padding: 50px;
+    padding-bottom: 100px;
+    background-color:grey;
+    margin: auto auto;
+}
+
+.mainFontStyle{
+    color: white;
+}
+
+#topMenu{
+    margin-left: 80%;
+}
+
+#others{
+    margin-top: 30px;
+}

@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Trips</title>
+        <meta charset='UTF-8'>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'travelBuddy/css/details.css' %}" media="screen" title="no title"  charset="utf-8">
+    </head>
+
+    <body>
+        <div id='wrapper'>
+            <div id='topMenu'>
+                <a class='mainFontStyle' href="/logout">Logout</a> <a class='mainFontStyle' href="/travels">main</a>
+            </div>
+            
+            <h2>{{trip.destination}}</h2>
+            <p>Planned by: {{planner}}</p>
+            <p>Description: {{trip.description}}</p>
+            <p>Travel Date From: {{trip.travel_start}}</p>
+            <p>Travel Date To: {{trip.travel_end}}</p>
+          
+            {% if attending|length > 0 %}
+            <h2 id='others'>Other users' joining the trip:</h2>
+                {% for user in attending %}
+                    <p>{{user.first_name}} {{user.last_name}}</p>
+                {% endfor %}
+            {% endif %}
+         
+        </div>
+       
+    </body>
+
+</html>

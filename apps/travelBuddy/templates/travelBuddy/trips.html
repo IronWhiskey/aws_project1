@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Trips</title>
+        <meta charset='UTF-8'>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'travelBuddy/css/trips.css' %}" media="screen" title="no title"  charset="utf-8">
+    </head>
+
+    <body>
+        <div id='wrapper'>
+            <a href="logout" id='exit'>Logout</a>
+            <h1>Hello, {{userName}}</h1>
+
+            <p class='mainFontStyle'>Your  Trip Schedules</p>
+            <table id='table1'>
+                    <tr>
+                        <th>Destination</th>
+                        <th>Travel Start Date</th>
+                        <th>Travel End Date</th>
+                        <th>Plan</th>
+                    </tr>
+                    {% if data_1 %}
+                        {% for trip in data_1 %}
+                            <tr>
+                                <th><a href="details/{{trip.id}}">{{trip.destination}}</a></th>
+                                <th>{{trip.travel_start}}</th>
+                                <th>{{trip.travel_end}}</th>
+                                <th>{{trip.description}}</th>
+                            </tr>   
+                        {% endfor %}
+                    {% endif %}
+            </table>
+
+            <p class='mainFontStyle'>Other User's Travel Plans</p>
+            <table id='table2'>
+                    <tr>
+                        <th>Name</th>
+                        <th>Destination</th>
+                        <th>Travel Start Date</th>
+                        <th>Travel End Date</th>
+                        <th>Do you want to Join?</th>
+                    </tr>
+                    {% if data_2|length > 0%}
+                        {% for tuple in data_2 %}
+                            <tr>
+                                <th>{{tuple.0}}</th>
+                                <th><a href="details/{{tuple.1.id}}">{{tuple.1.destination}}</a></th>
+                                <th>{{tuple.1.travel_start}}</th>
+                                <th>{{tuple.1.travel_end}}</th>
+                                <th><a href="join/{{tuple.1.id}}">Join</a></th>
+                                <input type='hidden' name='trip_id' value={{tuple.1.id}}>  
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+            </table>
+
+
+                <a href="travels/add" class='mainFontStyle'>Add Travel Plan</a>
+
+            </form>
+            
+        </div>
+       
+    </body>
+
+</html>

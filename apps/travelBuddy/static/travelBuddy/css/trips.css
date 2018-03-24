@@ -1,0 +1,38 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+#wrapper{
+    /* width: 970px; */
+    padding: 50px;
+    padding-bottom: 100px;
+    background-color:grey;
+    margin: 0px auto;
+}
+
+.mainFontStyle{
+    color: white;
+}
+
+#exit{
+   text-align: right;
+   color: white;
+   margin-left: 80%;
+}
+
+
+#wrapper h1{
+    margin: 20px;
+    color: white;
+}
+
+
+#wrapper table {
+    margin-bottom: 40px;
+    border: 1px solid black;
+}
+
+#wrapper table *{
+    margin-right: 100px;
+}

@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Register/Login</title>
+        <meta charset='UTF-8'>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'travelBuddy/css/addplan.css' %}" media="screen" title="no title"  charset="utf-8">
+    </head>
+
+    <body>
+        <div id='wrapper'>
+
+            <div id='menu'>
+                    <a href="/travels">Home</a>
+                    <a href="/logout">Logout</a>
+            </div>
+
+            <h1>Add a Trip</h1>
+
+            <form action='/addplan' method='post'>
+                {% csrf_token %}
+
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                
+                <div id='row1'>
+                    <label>Destination:</label>
+                    <input type='text' name='destination'>
+                </div>
+                
+                <div id='row2'>
+                    <label>Description:</label>
+                    <input type='text' name='description'>
+                </div>
+    
+                <div id='row3'>
+                    <label>Travel Date From:</label>
+                    <input type='date' name='travel_start'>
+                </div>
+
+                <div id='row4'>
+                    <label>Travel Date To:</label>
+                    <input type='date' name='travel_end'>
+                </div>
+
+                <input type='submit' id='submit' value='Add'>
+
+            </form>
+            
+        </div>
+       
+    </body>
+
+</html>
