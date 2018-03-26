@@ -35,6 +35,7 @@
             </table>
 
             <p class='mainFontStyle'>Other User's Travel Plans</p>
+            {% if data_2|length > 0 %}
             <table id='table2'>
                     <tr>
                         <th>Name</th>
@@ -43,19 +44,18 @@
                         <th>Travel End Date</th>
                         <th>Do you want to Join?</th>
                     </tr>
-                    {% if data_2|length > 0%}
-                        {% for tuple in data_2 %}
+                        {% for trip in data_2 %}
                             <tr>
-                                <th>{{tuple.0}}</th>
-                                <th><a href="details/{{tuple.1.id}}">{{tuple.1.destination}}</a></th>
-                                <th>{{tuple.1.travel_start}}</th>
-                                <th>{{tuple.1.travel_end}}</th>
-                                <th><a href="join/{{tuple.1.id}}">Join</a></th>
-                                <input type='hidden' name='trip_id' value={{tuple.1.id}}>  
+                                <th>{{trip.planner.first_name}} {{trip.planner.last_name}}</th>
+                                <th><a href="details/{{trip.id}}">{{trip.destination}}</a></th>
+                                <th>{{trip.travel_start}}</th>
+                                <th>{{trip.travel_end}}</th>
+                                <th><a href="join/{{trip.id}}">Join</a></th>
+                                <input type='hidden' name='trip_id' value={{trip.id}}>  
                             </tr>
                         {% endfor %}
-                    {% endif %}
             </table>
+            {% endif %}
 
 
                 <a href="travels/add" class='mainFontStyle'>Add Travel Plan</a>

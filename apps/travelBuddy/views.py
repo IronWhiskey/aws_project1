@@ -49,18 +49,26 @@ def renderTrips(request):
 
     u = User.objects.get(id = request.session['user_id'])
 
-    myList = []
-    other_users = User.objects.exclude(id=u.id)
-    for person in other_users:
-        name = person.first_name + " " + person.last_name
-        person_trips = person.trips.all()
-        for t in person_trips:
-            myList.append( (name, t) )
+    # myList = []
+    # other_users = User.objects.exclude(id=u.id)
+    # include = True
+    # for person in other_users:
+    #     name = person.first_name + " " + person.last_name
+    #     person_trips = person.trips.all()
+    #     for t in person_trips:
+    #         going = t.attendee.all()
+    #         if len(going) > 0:
+    #             for p in going:
+    #                 if p.id == u.id:
+    #                     include = False
+    #         if include:
+    #             myList.append( (name, t) )
+    #             include = True
 
     context = {
         "userName": u.first_name,
         "data_1": u.trips.all(),
-        "data_2": myList
+        "data_2": Trip.objects.exclude(planner=u.id).exclude(attendee=u.id)
     }
     return render(request, 'travelBuddy/trips.html', context)
 
