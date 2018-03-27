@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Tab Title</title>
+        <meta charset='UTF-8'>
+        {% load static %}
+        <!-- <link rel="stylesheet" href="{% static 'ironwhiskey/css/main.css' %}" media="screen" title="no title"  charset="utf-8"> -->
+    </head>
+
+    <body id ='body'>
+        <div id='wrapper'>
+
+            <div id='topMenu'>
+                    <a class='mainFontStyle' href="/quotes">Dashboard</a> | <a class='mainFontStyle' href="/logout">Logout</a>
+            </div>
+
+            <p>Posts by {{ u }}</p>
+            <p>Count: {{count}}</p>
+
+            {% for q in data_1 %}
+            <div>
+                <p>{{q.quotedBy}}: {{q.quote}}</p>
+            </div>
+            {% endfor %}
+
+        </div>
+    </body>
+
+</html>

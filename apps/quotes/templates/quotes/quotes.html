@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Tab Title</title>
+        <meta charset='UTF-8'>
+        {% load static %}
+        <!-- <link rel="stylesheet" href="{% static 'quotes/static/quotes.css' %}" media="screen" title="no title"  charset="utf-8"> -->
+    </head>
+
+    <body id ='body'>
+           
+        <div id='wrapper'>
+                <div id='topMenu'>
+                     <a class='mainFontStyle' href="/logout">Logout</a>
+                </div>
+            <h1>Welcome {{u.first_name}}</h1>
+            
+            <div id="quotable_q">
+                <h3>Quotable Quotes:</h3>
+                {% for q in data_1 %}
+                <form action='/add/{{q.id}}' method='post'>
+                    {% csrf_token %}
+                    <p>Quote: {{ q.quote }}</p>
+                    <p>posted by <a class='mainFontStyle' href="/details/{{q.postedby.id}}">{{ q.postedby.first_name }} {{q.postedby.last_name}}</a></p>
+                    <input type='submit' id='submit' value='Add to My List'>
+                </form>
+                {% endfor %}
+            </div>
+
+            <div id="favorite_q">
+                <h3>Your Favorites:</h3>
+                {% for q in data_2 %}
+                <form action='/remove/{{q.id}}' method='post'>
+                    {% csrf_token %}
+                    <p>{{q.quote}}</p>
+                    <p>posted by <a class='mainFontStyle' href="/details/{{q.postedby.id}}">{{q.postedby.first_name}} {{q.postedby.last_name}}</a></p>
+                    <input type='submit' id='submit' value='Remove My List'>
+                </form>
+                {% endfor %}
+            </div>
+
+
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+                <form action='/contributeQuote' method='post' id='new_quote'>
+                    {% csrf_token %}
+                    <p>Contribute a Quote:</p>
+                    <div>
+                        <label>Quoted By:</label>
+                        <input type='text' name='quoted_by'>
+                    </div>
+                    <div>
+                        <label>Message:</label>
+                        <input type='text' name='quote'>
+                    </div>
+                    <input type='submit' id='submit' value='Submit'>
+                </form>
+
+        </div>
+       
+    </body>
+
+</html>

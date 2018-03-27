@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Register/Login</title>
+        <meta charset='UTF-8'>
+        {% load static %}
+        <!-- <link rel="stylesheet" href="{% static 'quotes/css/main.css' %}" media="screen" title="no title"  charset="utf-8"> -->
+    </head>
+
+    <body>
+        <div id='wrapper'>
+
+            <h1>Welcome</h1>
+
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <form action='/register' method='post'>
+                {% csrf_token %}
+
+                <h3>Register</h3>
+
+                <div id='row1'>
+                    <label>First Name:</label>
+                    <input type='text' name='firstName'>
+                </div>
+                
+
+                <div id='row2'>
+                    <label>Last Name:</label>
+                    <input type='text' name='lastName'>
+                </div>
+
+                <div id='row3'>
+                    <label>Alias:</label>
+                    <input type='text' name='alias'>
+                </div>
+    
+                <div id='row4'>
+                    <label>Email:</label>
+                    <input type='text' name='email'>
+                </div>
+
+                <div id='row5'>
+                    <label>password:</label>
+                    <input type='password' name='password'>
+                </div>
+
+                <p id='notice'>*Password should be at least 8 characters</p>
+
+                <div id='row6'>
+                    <label>Confrim password:</label>
+                    <input type='password' name='confirmPass'>
+                </div>
+
+                <div id='row7'>
+                    <label>Dat of Birth:</label>
+                    <input type='date' name='dob'>
+                </div>
+                
+                <input type='submit' id='submit' value='Register'>
+
+            </form>
+
+
+            <form action='/login' method='post'>
+                {% csrf_token %}
+
+                <h3>Login</h3>
+
+                <div id='row6'>
+                    <label>Email:</label>
+                    <input type='text' name='email'>
+                </div>
+
+                <div id='row7'>
+                    <label>Password:</label>
+                    <input type='password' name='password'>
+                </div>
+  
+                <input type='submit' id='submit' value='Login'>
+
+            </form>
+            
+        </div>
+       
+    </body>
+
+</html>
